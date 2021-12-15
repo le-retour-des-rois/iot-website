@@ -14,13 +14,14 @@
     justify-content: center;
     align-items: center;
     min-width: 20vw;
-    min-height: 40vh;
+    min-height: 50vh;
     border-radius: 10px;
     margin-left: 3vw;
     margin-right: 3vw;
     margin-top: 5vh;
     margin-bottom: 5vh;
     flex-direction: column;
+    border: none;
 }
 
 .pp {
@@ -28,5 +29,5 @@
     background-color: #292C35;
     min-width: 150px;
     min-height: 150px;
-    margin-bottom: 10vh;
+    margin-bottom: 15vh;
 }

@@ -5,29 +5,31 @@ import "./Users.css"
 
 
 export const Users = () => {
-    const [users, setUsers] = useState([""])
+    const [users, setUsers] = useState<any[]>([])
     const [isloaded, setLoaded] = useState(false)
 
     useEffect(() => {
         if (!isloaded) {
-            const res = axios.get(`process.env.REACT_URI/user/0`).then((rep) => {
-                setUsers(rep.data.username)
+            const res = axios.get(`http://localhost:8400/user`).then((rep) => {
+                const tmp: any[] = []
+                rep.data.map((elm: any) => { tmp.push({ name: elm.username, id: elm.id, org: elm.org_id }) })
+                console.log(tmp)
+                setUsers(tmp)
                 setLoaded(true)
-            }).catch((err) => console.error(err))            
+            }).catch((err) => console.error(err))
         }
 
     })
     return (
         <div className="users">
-            {users.map((elm) => 
-                <div className="user-prev">
-                    <div className="pp"/>
-                        <span style={{fontSize: "2em"}}> 
-                            {elm}
-                        </span> 
-                    </div>
-            )}
-            
+            {users != undefined ? users.map((elm) =>
+                <button className="user-prev">
+                    <div className="pp" />
+                    <span style={{ fontSize: "2em" }}>
+                        {elm.name}
+                    </span>
+                </button>
+            ) : <></>}
         </div>
     )
 }

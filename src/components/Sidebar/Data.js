@@ -5,7 +5,7 @@ export const data = [
     },
     {
         name: "Employee Management",
-        path: "/",
+        path: "/users",
     },
     {
         name: "Permissions Management",
