@@ -1,0 +1,131 @@
+.user-page {
+    text-align: center;
+    background-color: #292C35;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    min-width: 20vw;
+    min-height: 50vh;
+    background-color:#DCAE52;
+    border-radius: 10px;
+}
+
+.user-permissions-logs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 25vw;
+    min-height: 60vh;
+    border-radius: 10px;
+}
+
+.user-logs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 20vw;
+    min-height: 23vh;
+    max-height: 23vh;
+    background-color:#DCAE52;
+    border-radius: 10px;
+}
+
+.user-permissions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 20vw;
+    min-height: 25vh;
+    background-color:#DCAE52;
+    border-radius: 10px;
+    margin-top: 2vh;
+}
+
+.user-profile-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    min-height: 20vh;
+    margin-left: 3vw;
+}
+
+.user-profile-text {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 20vh;
+}
+
+.picture {
+    background-color: #292C35;
+    min-width: 3vw;
+    min-height: 7vh;
+    margin-right: 1vw;
+}
+
+.logs {
+    min-width: 17vw;
+    min-height: 15vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 1vh;
+    padding-left: 1vw;
+    flex-direction: column;
+    background-color: #292C35;
+    border-radius: 10px;
+    margin-top: 2vh;
+}
+
+.perm-content {
+    min-width: 17vw;
+    min-height: 17vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 1vh;
+    padding-left: 1vw;
+    flex-direction: column;
+    background-color: #292C35;
+    border-radius: 10px;
+    margin-top: 2vh;
+}
+
+.log-txt {
+    color: white;
+    margin-top: 0.5vh;
+}
+
+.perms-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.perms {
+    min-width: 17vw;
+    min-height: 15vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 1vh;
+    padding-left: 1vw;
+    flex-direction: column;
+    background-color: #292C35;
+    border-radius: 10px;
+    margin-top: 2vh;
+}

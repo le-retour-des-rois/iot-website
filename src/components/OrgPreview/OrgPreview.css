@@ -1,0 +1,16 @@
+.preview {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #DCAE52;
+    min-width: 85vw;
+    min-height: 10vh;
+    max-width: 70vw;
+    max-height: 8vh;
+    border-radius: 10px;
+    margin-top: 10vh;
+    padding-left: 2vw;
+    font-size: 1.3em;
+    text-decoration: none;
+    color: black;
+}

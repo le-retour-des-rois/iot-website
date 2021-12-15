@@ -1,0 +1,67 @@
+.organisation {
+    text-align: center;
+    background-color: #292C35;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.orgName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50vw;
+    min-height: 20vh;
+    border-radius: 10px;
+    background-color: #DCAE52;
+}
+
+.name {
+    color: #292C35;
+    font-size: 2.5em;
+}
+
+.door {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 20vw;
+    min-height: 8vh;
+    flex-direction: row;
+    background-color: #DCAE52;
+    border-radius: 10px;    
+    margin-top: 5vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+.doors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 35vw;
+    max-width: 35vw;
+    flex-direction: column;
+
+}
+
+.doorsContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    min-width: 70vw;
+    max-width: 70vw;
+    flex-direction: row;
+    margin-top: 10vh;
+}
+
+.name-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

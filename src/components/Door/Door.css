@@ -1,0 +1,11 @@
+.door-page {
+    text-align: center;
+    background-color: #292C35;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
