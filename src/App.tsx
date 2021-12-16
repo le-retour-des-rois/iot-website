@@ -41,13 +41,13 @@ function App() {
             <Route exact path="/">
               {sections != undefined ? sections.map((elm) => <Preview name={elm.name} link={`organization/${elm.name}`} key={elm.id} />) : <></>}
             </Route>
-            <Route exact path="organization/door/:door">
+            <Route exact path="/door/:door">
               <Door />
             </Route>
             <Route exact path="/organization/:organization">
               <Org />
             </Route>
-            <Route exact path="/user">
+            <Route exact path="/user/:user">
               <User />
             </Route>
             <Route exact path="/users">

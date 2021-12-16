@@ -9,3 +9,38 @@
     flex-direction: column;
 }
 
+.door-prev {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #DCAE52;
+    min-width: 30vw;
+    min-height: 60vh;
+    border-radius: 20px;
+}
+
+.title-door {
+    color: #292C35;
+}
+
+.form-door {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #292C35;
+    border: solid;
+    border-radius: 20px;
+    border-color: #866a33;
+    min-width: 30vw;
+    min-height: 50vh;
+    max-width: 30vw;
+    max-height: 50vh;
+    position: absolute;
+    margin-top: 20vh;
+    top: 0;
+    text-align: center;
+}
+
+.txt-field {
+    color: #DCAE52
+}

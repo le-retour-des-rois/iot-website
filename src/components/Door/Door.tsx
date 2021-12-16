@@ -1,14 +1,16 @@
 import React from "react"
-
+import "./Door.css"
 export const Door = () => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const door = queryParams.get('door')
-
-    return <div className="door-page">
-        <div >
-
+    const uri = (window.location.href).split('/')
+    const door = uri[uri.length - 1].replace("%20", " ")
+    console.log(door)
+    return (<div className="door-page">
+        <div className="door-prev" >
+            <h1 className="title-door">
+                {door}
+            </h1>
         </div>
-    </div>
+    </div>)
 }
 
 export default Door

@@ -2,19 +2,14 @@ import React, { useEffect, useState } from "react"
 import "./User.css"
 import axios from "axios"
 import { data } from "../Sidebar/Data"
+import { Button, Menu, MenuItem } from "@mui/material"
 
 
 export const User = () => {
+    const [userDoors, setUserDoors] = useState<string[]>([])
 
-    const [user, setUser] = useState("")
-    const [isloaded, setLoaded] = useState(false)
-
-    useEffect(() => {
-        const res = axios.get(`${process.env.REACT_URI}/user/0`).then((res) => {
-            setUser(res.data.username)
-            setLoaded(true)
-        }).catch((err) => console.error(err))
-    })
+    const uri = (window.location.href).split('/')
+    const user = uri[uri.length - 1].replace("%20", " ")
     
     return <div className="user-page">
         <div className="user-profile">
@@ -24,12 +19,7 @@ export const User = () => {
                     <span>
                         {user}
                     </span>
-                    <span style={{marginTop: "0.7vh"}}>
-                        {user}
-                    </span>
-                    <span style={{marginTop: "0.7vh"}}>
-                        test.123@gmail.com
-                    </span>
+
                 </div>
             </div>
         </div>
@@ -53,22 +43,121 @@ export const User = () => {
                         <span>
                             Permissions
                         </span>
-                        <button>
-                            Ajouter une permissions
-                        </button>
+                        <Form userDoors={userDoors} setUserDoors={setUserDoors} user={user}/>
                     </div>
                     <div className="perm-content">
-                        <span className="log-txt">
-                            Perm 1
-                        </span>
-                        <span className="log-txt">
-                            Perm 2
-                        </span>
+                        {userDoors.map((d) =>
+                            <span className="log-txt">
+                                {d}
+                            </span>)}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+}
+
+interface Form {
+    userDoors: string[]
+    setUserDoors: any
+    user: string
+}
+
+export const Form = ({userDoors, setUserDoors, user}: Form) => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const handleClick = (event: any) => {
+        setAnchorEl(event.currentTarget);
+      };
+
+    return (<div >
+        <Button style={{color: "#292C35"}} onClick={(e: any) => handleClick(e)}> 
+            Ajouter une permissions
+        </Button>
+        {<FormContent anchorEl={anchorEl} setAnchorEl={setAnchorEl} userDoors={userDoors} setUserDoors={setUserDoors} user={user}/>}
+    </div>)
+}
+
+interface FormProps {
+    anchorEl: any
+    setAnchorEl: any
+    userDoors: string[]
+    setUserDoors: any
+    user: string
+}
+
+export const FormContent = ({anchorEl, setAnchorEl, userDoors, setUserDoors, user}: FormProps) => {
+    const open = Boolean(anchorEl);
+    //get user id
+    const [isloaded, setLoaded] = useState(false)
+    const [id, setId] = useState(0)
+    const [doors, setDoors] = useState<string[]>([])
+    const getDoors = () => {
+        axios.get('http://localhost:8400/door/Le%20Retour%20Des%20Rois').then((res) => {
+            var tmp: string[] = []
+            res.data.map((elm: any) => {
+                tmp.push(elm.name)
+            }) 
+            setDoors(tmp)
+        }).catch((err) => console.error(err))
+
+    }
+
+    useEffect(() => {
+        if (!isloaded) {
+            getDoors()     
+            axios.get(`http://localhost:8400/user/name/Le%20Retour%20Des%20Rois/${user}`).then((res) => {
+            console.log(res.data.id)
+            setId(res.data.id)
+        }).catch((err) => console.error(err))      
+        if (id !== 0) {
+            axios.get(`http://localhost:8400/admin/user/${id}`).then((res) => {
+
+            setUserDoors(res.data)
+            console.log(res.data)
+            setLoaded(true)   
+            })
+        } 
+        }     
+
+    })
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    return (<div>
+        <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+            }}
+            transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+            }}
+        >
+        {doors.map((elm) => <MenuItem onClick={(e) => {
+            if(doors.find((e) => elm == e) != undefined) {
+                const tmp = userDoors
+                tmp.push(elm)
+                axios.post('http://localhost:8400/admin/assign', {user_id: id, section_ids: [], door_names: tmp}).then((res) => {
+                    setLoaded(false)
+                })
+            }
+            else {
+                const newList = userDoors.filter((item) => item !== elm);
+                axios.post('http://localhost:8400/admin/assign', {user_id: id, section_ids: [], door_names: newList}).then((res) => {
+                    setLoaded(false)
+                })
+            }
+        }}>{elm}</MenuItem>)}       
+        </Menu>
+    </div>)
 }
 
 export default User
