@@ -92,7 +92,7 @@ export const FormContent = ({ anchorEl, setAnchorEl, userDoors, setUserDoors, us
     const [id, setId] = useState(0)
     const [doors, setDoors] = useState<string[]>([])
     const getDoors = () => {
-        axios.get('http://192.168.0.10:8400/door/Le%20Retour%20Des%20Rois').then((res) => {
+        axios.get('http://34.89.98.217:8400/door/Le%20Retour%20Des%20Rois').then((res) => {
             var tmp: string[] = []
             res.data.map((elm: any) => {
                 tmp.push(elm.name)
@@ -105,12 +105,12 @@ export const FormContent = ({ anchorEl, setAnchorEl, userDoors, setUserDoors, us
     useEffect(() => {
         if (!isloaded) {
             getDoors()
-            axios.get(`http://192.168.0.10:8400/user/name/Le%20Retour%20Des%20Rois/${user}`).then((res) => {
+            axios.get(`http://34.89.98.217:8400/user/name/Le%20Retour%20Des%20Rois/${user}`).then((res) => {
                 console.log(res.data.id)
                 setId(res.data.id)
             }).catch((err) => console.error(err))
             if (id !== 0) {
-                axios.get(`http://192.168.0.10:8400/admin/user/${id}`).then((res) => {
+                axios.get(`http://34.89.98.217:8400/admin/user/${id}`).then((res) => {
 
                     setUserDoors(res.data)
                     console.log(res.data)
@@ -145,13 +145,13 @@ export const FormContent = ({ anchorEl, setAnchorEl, userDoors, setUserDoors, us
                 if (doors.find((e) => elm == e) != undefined) {
                     const tmp = userDoors
                     tmp.push(elm)
-                    axios.post('http://192.168.0.10:8400/admin/assign', { user_id: id, section_ids: [], door_names: tmp }).then((res) => {
+                    axios.post('http://34.89.98.217:8400/admin/assign', { user_id: id, section_ids: [], door_names: tmp }).then((res) => {
                         setLoaded(false)
                     })
                 }
                 else {
                     const newList = userDoors.filter((item) => item !== elm);
-                    axios.post('http://192.168.0.10:8400/admin/assign', { user_id: id, section_ids: [], door_names: newList }).then((res) => {
+                    axios.post('http://34.89.98.217:8400/admin/assign', { user_id: id, section_ids: [], door_names: newList }).then((res) => {
                         setLoaded(false)
                     })
                 }

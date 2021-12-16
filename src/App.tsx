@@ -23,7 +23,7 @@ function App() {
   const [isloaded, setLoaded] = useState(false)
   useEffect(() => {
     if (!isloaded) {
-      const res = axios.get(`http://192.168.0.10:8400/section`).then((rep) => {
+      const res = axios.get(`http://34.89.98.217:8400/section`).then((rep) => {
         console.log(rep)
         setSections(rep.data)
         setLoaded(true)
