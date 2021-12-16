@@ -10,11 +10,11 @@ export const User = () => {
 
     const uri = (window.location.href).split('/')
     const user = uri[uri.length - 1].replace("%20", " ")
-    
+
     return <div className="user-page">
         <div className="user-profile">
             <div className="user-profile-info">
-                <div className="picture"/>
+                <div className="picture" />
                 <div className="user-profile-text">
                     <span>
                         {user}
@@ -43,7 +43,7 @@ export const User = () => {
                         <span>
                             Permissions
                         </span>
-                        <Form userDoors={userDoors} setUserDoors={setUserDoors} user={user}/>
+                        <Form userDoors={userDoors} setUserDoors={setUserDoors} user={user} />
                     </div>
                     <div className="perm-content">
                         {userDoors.map((d) =>
@@ -63,17 +63,17 @@ interface Form {
     user: string
 }
 
-export const Form = ({userDoors, setUserDoors, user}: Form) => {
+export const Form = ({ userDoors, setUserDoors, user }: Form) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
-      };
+    };
 
     return (<div >
-        <Button style={{color: "#292C35"}} onClick={(e: any) => handleClick(e)}> 
+        <Button style={{ color: "#292C35", fontSize: "0.7em" }} onClick={(e: any) => handleClick(e)}>
             Ajouter une permissions
         </Button>
-        {<FormContent anchorEl={anchorEl} setAnchorEl={setAnchorEl} userDoors={userDoors} setUserDoors={setUserDoors} user={user}/>}
+        {<FormContent anchorEl={anchorEl} setAnchorEl={setAnchorEl} userDoors={userDoors} setUserDoors={setUserDoors} user={user} />}
     </div>)
 }
 
@@ -85,7 +85,7 @@ interface FormProps {
     user: string
 }
 
-export const FormContent = ({anchorEl, setAnchorEl, userDoors, setUserDoors, user}: FormProps) => {
+export const FormContent = ({ anchorEl, setAnchorEl, userDoors, setUserDoors, user }: FormProps) => {
     const open = Boolean(anchorEl);
     //get user id
     const [isloaded, setLoaded] = useState(false)
@@ -96,7 +96,7 @@ export const FormContent = ({anchorEl, setAnchorEl, userDoors, setUserDoors, use
             var tmp: string[] = []
             res.data.map((elm: any) => {
                 tmp.push(elm.name)
-            }) 
+            })
             setDoors(tmp)
         }).catch((err) => console.error(err))
 
@@ -104,25 +104,25 @@ export const FormContent = ({anchorEl, setAnchorEl, userDoors, setUserDoors, use
 
     useEffect(() => {
         if (!isloaded) {
-            getDoors()     
+            getDoors()
             axios.get(`http://localhost:8400/user/name/Le%20Retour%20Des%20Rois/${user}`).then((res) => {
-            console.log(res.data.id)
-            setId(res.data.id)
-        }).catch((err) => console.error(err))      
-        if (id !== 0) {
-            axios.get(`http://localhost:8400/admin/user/${id}`).then((res) => {
+                console.log(res.data.id)
+                setId(res.data.id)
+            }).catch((err) => console.error(err))
+            if (id !== 0) {
+                axios.get(`http://localhost:8400/admin/user/${id}`).then((res) => {
 
-            setUserDoors(res.data)
-            console.log(res.data)
-            setLoaded(true)   
-            })
-        } 
-        }     
+                    setUserDoors(res.data)
+                    console.log(res.data)
+                    setLoaded(true)
+                })
+            }
+        }
 
     })
 
     const handleClose = () => {
-      setAnchorEl(null);
+        setAnchorEl(null);
     };
 
     return (<div>
@@ -133,29 +133,29 @@ export const FormContent = ({anchorEl, setAnchorEl, userDoors, setUserDoors, use
             open={open}
             onClose={handleClose}
             anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
+                vertical: 'top',
+                horizontal: 'left',
             }}
             transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
+                vertical: 'top',
+                horizontal: 'left',
             }}
         >
-        {doors.map((elm) => <MenuItem onClick={(e) => {
-            if(doors.find((e) => elm == e) != undefined) {
-                const tmp = userDoors
-                tmp.push(elm)
-                axios.post('http://localhost:8400/admin/assign', {user_id: id, section_ids: [], door_names: tmp}).then((res) => {
-                    setLoaded(false)
-                })
-            }
-            else {
-                const newList = userDoors.filter((item) => item !== elm);
-                axios.post('http://localhost:8400/admin/assign', {user_id: id, section_ids: [], door_names: newList}).then((res) => {
-                    setLoaded(false)
-                })
-            }
-        }}>{elm}</MenuItem>)}       
+            {doors.map((elm) => <MenuItem onClick={(e) => {
+                if (doors.find((e) => elm == e) != undefined) {
+                    const tmp = userDoors
+                    tmp.push(elm)
+                    axios.post('http://localhost:8400/admin/assign', { user_id: id, section_ids: [], door_names: tmp }).then((res) => {
+                        setLoaded(false)
+                    })
+                }
+                else {
+                    const newList = userDoors.filter((item) => item !== elm);
+                    axios.post('http://localhost:8400/admin/assign', { user_id: id, section_ids: [], door_names: newList }).then((res) => {
+                        setLoaded(false)
+                    })
+                }
+            }}>{elm}</MenuItem>)}
         </Menu>
     </div>)
 }
