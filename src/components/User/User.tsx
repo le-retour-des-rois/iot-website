@@ -7,10 +7,29 @@ import { Button, Menu, MenuItem } from "@mui/material"
 
 export const User = () => {
     const [userDoors, setUserDoors] = useState<string[]>([])
-
+    const [logs, setLogs] = useState<string[]>([])
+    const [id, setId] = useState(0)
     const uri = (window.location.href).split('/')
     const user = uri[uri.length - 1].replace("%20", " ")
+    useEffect(() => {
+        if (id == 0)
+            axios.get(`http://34.89.98.217:8400/user/name/Le%20Retour%20Des%20Rois/${user}`).then((res) => {
+                console.log(res.data.id)
+                setId(res.data.id)
+                axios.get(`http://34.89.98.217:8400/transactions/user/${res.data.id}`).then((rep) => {
+                    console.log(rep.data)
+                    const tmp: string[] = []
+                    rep.data.map((el: any) => {
+                        let str = ""
+                        str = el.date + " " + el.method
+                        tmp.push(str)
+                    })
+                    setLogs(tmp)
+                    console.log(logs)
+                })
+            }).catch((err) => console.error(err))
 
+    })
     return <div className="user-page">
         <div className="user-profile">
             <div className="user-profile-info">
@@ -29,12 +48,11 @@ export const User = () => {
                     Logs
                 </span>
                 <div className="logs">
-                    <span className="log-txt">
-                        Log 1
-                    </span>
-                    <span className="log-txt">
-                        Log 2
-                    </span>
+                    {logs.map((elm) => <span className="log-txt">
+                        {elm}
+                    </span>)}
+
+
                 </div>
             </div>
             <div className="user-permissions">
