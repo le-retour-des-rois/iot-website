@@ -22,7 +22,7 @@ export const Org = () => {
     const section = uri[uri.length - 1].replace("%20", " ")
     useEffect(() => {
         if (!isloaded) {
-            const res = axios.get(`http://localhost:8400/door/Le%20Retour%20Des%20Rois/${section}/`).then((rep) => {
+            const res = axios.get(`http://192.168.0.10:8400/door/Le%20Retour%20Des%20Rois/${section}/`).then((rep) => {
                 console.log(rep)
                 setDoors(rep.data)
                 setLoaded(true)
@@ -32,7 +32,7 @@ export const Org = () => {
     })
 
     const deleteDoor = (name: string) => {
-        const res = axios.delete(`http://localhost:8400/door/Le%20Retour%20Des%20Rois/${section}/${name}`).then((rep) => {
+        const res = axios.delete(`http://192.168.0.10:8400/door/Le%20Retour%20Des%20Rois/${section}/${name}`).then((rep) => {
             console.log("Door deleted")
             setLoaded(false)
         }).catch((err) => console.error(err))
@@ -74,7 +74,7 @@ export const FormContent = ({ setHide }: FormProps) => {
     const uri = (window.location.href).split('/')
     const section = uri[uri.length - 1].replace("%20", " ")
     const createPorte = () => {
-        axios.post('http://localhost:8400/door', { name: name, hash: hash, organization_name: "Le Retour Des Rois", section_name: section }).then((rep) => { console.log(rep) }).catch((err) => { console.log(err) })
+        axios.post('http://192.168.0.10:8400/door', { name: name, hash: hash, organization_name: "Le Retour Des Rois", section_name: section }).then((rep) => { console.log(rep) }).catch((err) => { console.log(err) })
     }
     return (<div className="form-door">
         <h1 style={{ color: "#DCAE52" }}>

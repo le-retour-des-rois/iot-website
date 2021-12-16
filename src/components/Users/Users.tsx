@@ -13,7 +13,7 @@ export const Users = () => {
 
     useEffect(() => {
         if (!isloaded) {
-            const res = axios.get(`http://localhost:8400/user`).then((rep) => {
+            const res = axios.get(`http://192.168.0.10:8400/user`).then((rep) => {
                 const tmp: any[] = []
                 rep.data.map((elm: any) => { tmp.push({ name: elm.username, id: elm.id, org: elm.org_id }) })
                 console.log(tmp)
@@ -76,7 +76,7 @@ export const FormContent = ({ setHide, setLoaded }: FormProps) => {
         setAnchorEl(null);
     };
     const createUser = () => {
-        axios.post('http://localhost:8400/user', { username: name, type: rank.toLowerCase(), organization_name: "Le Retour Des Rois", mac_addr: mac, password: password }).then((rep) => { console.log(rep) }).catch((err) => { console.log(err) })
+        axios.post('http://192.168.0.10:8400/user', { username: name, type: rank.toLowerCase(), organization_name: "Le Retour Des Rois", mac_addr: mac, password: password }).then((rep) => { console.log(rep) }).catch((err) => { console.log(err) })
     }
     return (<div className="user-form">
         <h1 style={{ color: "#DCAE52" }}>
